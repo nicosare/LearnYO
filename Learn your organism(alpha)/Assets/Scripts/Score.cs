@@ -11,19 +11,29 @@ public class Score : MonoBehaviour
     public GameObject panelWin;
     public GameObject joystic;
     public GameObject notification;
+    private int firstMutation;
+    private int secondMutation;
+    private bool isSelected;
 
     void Start()
     {
         score = 0;
-        target = 10;
+        target = 20;
+        isSelected = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collisison)
     {
+        if (!isSelected)
+        {
+            firstMutation = Random.Range(0, 7);
+            secondMutation = Random.Range(7, 15);
+        }
         if (collisison.gameObject.CompareTag("Point"))
         {
             Count();
-            Mutation();
+            Mutation(firstMutation, secondMutation);
+            isSelected = true;
         }
     }
 
@@ -40,9 +50,9 @@ public class Score : MonoBehaviour
         }
     }
 
-    public void Mutation()
+    public void Mutation(int firstMutation, int secondMutation)
     {
-        if (score == 3 || score == 6)
+        if (score == firstMutation || score == secondMutation)
         {
             SetMutation();
             StartCoroutine(onWaiterOffNotification());
@@ -58,7 +68,7 @@ public class Score : MonoBehaviour
         }
         else
         {
-            this.GetComponent<Transform>().localScale += new Vector3(0.2f, 0.2f, 0);
+            this.GetComponent<Transform>().localScale *= 1.3f;
         }
     }
 

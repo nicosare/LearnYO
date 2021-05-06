@@ -5,17 +5,17 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public float Speed = 0.5f;
-    public GameObject Player;
+    //public GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 positionPlayer = Player.transform.position;
+        Vector3 positionPlayer = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         if (transform.position.x > positionPlayer.x)
         {

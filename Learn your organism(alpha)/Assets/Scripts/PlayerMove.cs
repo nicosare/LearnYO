@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
         float y = Joystick.Vertical;
         float x = Joystick.Horizontal;
 
-        Vector2 move = (new Vector2(x, y) * Time.deltaTime) * Speed;
+        Vector2 move = new Vector2(x, y) * Time.deltaTime * Speed;
         transform.Translate(move);
         BorderMove();
     }

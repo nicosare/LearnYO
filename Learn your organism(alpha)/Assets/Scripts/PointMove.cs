@@ -5,18 +5,18 @@ using UnityEngine;
 public class PointMove : MonoBehaviour
 {
     public GameObject pointToMove;
-    private Vector2 screenBounds;
-    private float objectWidth;
-    private float objectHeight;
     public float Speed = 1f;
     bool isExists = false;
     private GameObject point;
+    public int range;
+    private float fieldWidth;
+    private float fieldHeight;
+    public GameObject field;
 
     void Start()
     {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        objectWidth = pointToMove.transform.GetComponent<SpriteRenderer>().bounds.extents.x;
-        objectHeight = pointToMove.transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+        fieldWidth = field.transform.localScale.x;
+        fieldHeight = field.transform.localScale.y;
     }
 
     private void SpawnPoint()
@@ -24,8 +24,9 @@ public class PointMove : MonoBehaviour
         if (!isExists)
         {
             isExists = true;
-            float xPos = Random.Range(screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
-            float yPos = Random.Range(screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
+            float xPos = Mathf.Clamp(Random.Range(transform.position.x - range, transform.position.x + range), fieldWidth / 2 * -1, fieldWidth / 2);
+            float yPos = Mathf.Clamp(Random.Range(transform.position.y - range, transform.position.y + range), fieldHeight / 2 * -1, fieldHeight / 2);
+
             point = Instantiate(pointToMove, new Vector3(xPos, yPos, -1), Quaternion.identity);
         }
     }
@@ -59,7 +60,9 @@ public class PointMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collisison)
     {
-        if (collisison.gameObject.CompareTag("PointToMove"))
+        if (collisison.gameObject.CompareTag("PointToMove")
+            || collisison.gameObject.CompareTag("Point")
+            || collisison.gameObject.CompareTag("Enemy"))
         {
             Destroy(point);
             isExists = false;

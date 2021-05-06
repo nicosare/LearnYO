@@ -120,6 +120,8 @@ MonoBehaviour:
   pointToMove: {fileID: 2051318563153777604, guid: f0afd1646b3eb1243bebf393cf2c0cd9,
     type: 3}
   Speed: 1
+  range: 2
+  field: {fileID: 5899900468873868669, guid: 69e9f0f62dacbd14cacfbc9312cfbb46, type: 3}
 --- !u!58 &8318352250798586753
 CircleCollider2D:
   m_ObjectHideFlags: 0
