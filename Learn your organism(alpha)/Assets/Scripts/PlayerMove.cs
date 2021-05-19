@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public bl_Joystick Joystick;
     public float Speed = 0.5f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,3 +40,4 @@ public class PlayerMove : MonoBehaviour
         transform.position = pos;
     }
 }
+

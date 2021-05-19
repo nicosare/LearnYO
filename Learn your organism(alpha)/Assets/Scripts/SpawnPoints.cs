@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SpawnPoints : MonoBehaviour
 {
-    public GameObject pointsPrefab;
-    public float timeBetweenSpawn = 1;
-    public int amount = 100;
+    public GameObject spawnPoint;
+    public float timeBetweenSpawn;
+    public int amount;
     private float fieldWidth;
     private float fieldHeight;
-    public int range;
-
+    public int spawnRange;
+    public int destroyRange;
+    public double safeZone;
     public GameObject field;
+    public GameObject spawnCenter;
 
     void Start()
     {
@@ -22,19 +24,27 @@ public class SpawnPoints : MonoBehaviour
 
     private IEnumerator SpawnPoint()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
         int countSpawn = 0;
-        while (countSpawn < amount)
+        while (true)
         {
-            var points = GameObject.FindGameObjectsWithTag("Point");
-            countSpawn++;
-            float xPos = Mathf.Clamp(Random.Range(player.transform.position.x - range, player.transform.position.x + range), fieldWidth / 2 * -1, fieldWidth / 2);
-            float yPos = Mathf.Clamp(Random.Range(player.transform.position.y - range, player.transform.position.y + range), fieldHeight / 2 * -1, fieldHeight / 2);
-            Instantiate(pointsPrefab, new Vector3(xPos, yPos, -1), Quaternion.identity);
+            var spawnCenterPos = spawnCenter.transform.position;
+            var points = GameObject.FindGameObjectsWithTag(spawnPoint.tag);
+            float xPos = Mathf.Clamp(Random.Range(spawnCenterPos.x - spawnRange, spawnCenterPos.x + spawnRange)
+                , fieldWidth / 2 * -1, fieldWidth / 2);
+            float yPos = Mathf.Clamp(Random.Range(spawnCenterPos.y - spawnRange, spawnCenterPos.y + spawnRange)
+                , fieldHeight / 2 * -1, fieldHeight / 2);
+            float zPos = spawnPoint.tag == "Enemy" ? -3 : -1;
+            if ((xPos > spawnCenterPos.x + safeZone || xPos < spawnCenterPos.x - safeZone ||
+                yPos > spawnCenterPos.y + safeZone || yPos < spawnCenterPos.y - safeZone) &&
+                countSpawn < amount)
+            {
+                Instantiate(spawnPoint, new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                countSpawn++;
+            }
             foreach (var p in points)
             {
-                var distance = (p.transform.position - player.transform.position).magnitude;
-                if (distance > 20)
+                var distance = (p.transform.position - spawnCenter.transform.position).magnitude;
+                if (distance > destroyRange)
                 {
                     Destroy(p);
                     countSpawn--;

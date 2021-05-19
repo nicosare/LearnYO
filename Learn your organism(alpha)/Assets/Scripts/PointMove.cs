@@ -5,16 +5,16 @@ using UnityEngine;
 public class PointMove : MonoBehaviour
 {
     public GameObject pointToMove;
-    public float Speed = 1f;
+    public float Speed;
     bool isExists = false;
     private GameObject point;
     public int range;
     private float fieldWidth;
     private float fieldHeight;
     public GameObject field;
-
     void Start()
     {
+
         fieldWidth = field.transform.localScale.x;
         fieldHeight = field.transform.localScale.y;
     }
