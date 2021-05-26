@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e65b002ddcafcf0408cf31edc92d3eb6
+  - enabled: 1
     path: Assets/Scenes/LYO.unity
     guid: e7c650be208180948885252a60ecf012
   m_configObjects: {}

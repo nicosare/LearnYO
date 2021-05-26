@@ -8,6 +8,7 @@ TagManager:
   - PointToMove
   - Point
   - Bounds
+  - Level2Info
   layers:
   - Default
   - TransparentFX
