@@ -30,11 +30,16 @@ public class PointMove : MonoBehaviour
             point = Instantiate(pointToMove, new Vector3(xPos, yPos, -1), Quaternion.identity);
         }
     }
+
     void Update()
     {
         SpawnPoint();
         Vector3 positionPoint = point.transform.position;
+        MoveTo(positionPoint);
+    }
 
+    private void MoveTo(Vector3 positionPoint)
+    {
         if (transform.position.y > positionPoint.y)
         {
             Vector2 move = (new Vector2(0, -1) * Time.deltaTime) * Speed;

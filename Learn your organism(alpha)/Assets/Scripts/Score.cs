@@ -40,7 +40,7 @@ public class Score : MonoBehaviour
     public void Count()
     {
         score++;
-        scoreText.GetComponent<Text>().text = "Score " + score.ToString();
+        scoreText.GetComponent<Text>().text = "Счёт: " + score.ToString() + "/" + target;
 
         if (score == target)
         {

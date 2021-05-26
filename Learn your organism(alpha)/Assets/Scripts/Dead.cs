@@ -11,9 +11,19 @@ public class Dead : MonoBehaviour
     {
         if (collisison.gameObject.CompareTag("Enemy"))
         {
-            panelLost.SetActive(true);
-            Time.timeScale = 0;
-            joystic.SetActive(false);
+            if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+            {
+                panelLost.SetActive(true);
+                Time.timeScale = 0;
+                joystic.SetActive(false);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                if (!gameObject.activeSelf)
+                    Camera2DFollowTDS.FindPlayer();
+                Destroy(gameObject,1);
+            }
         }
     }
 }
