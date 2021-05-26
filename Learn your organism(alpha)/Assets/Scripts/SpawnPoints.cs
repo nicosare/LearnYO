@@ -13,8 +13,6 @@ public class SpawnPoints : MonoBehaviour
     public int destroyRange;
     public double safeZone;
     public GameObject field;
-    public GameObject spawnCenter;
-
     void Start()
     {
         StartCoroutine(SpawnPoint());
@@ -27,7 +25,7 @@ public class SpawnPoints : MonoBehaviour
         int countSpawn = 0;
         while (true)
         {
-            var spawnCenterPos = spawnCenter.transform.position;
+            var spawnCenterPos = GameObject.FindGameObjectWithTag("Player").transform.position;
             var points = GameObject.FindGameObjectsWithTag(spawnPoint.tag);
             float xPos = Mathf.Clamp(Random.Range(spawnCenterPos.x - spawnRange, spawnCenterPos.x + spawnRange)
                 , fieldWidth / 2 * -1, fieldWidth / 2);
@@ -43,7 +41,7 @@ public class SpawnPoints : MonoBehaviour
             }
             foreach (var p in points)
             {
-                var distance = (p.transform.position - spawnCenter.transform.position).magnitude;
+                var distance = (p.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position).magnitude;
                 if (distance > destroyRange)
                 {
                     Destroy(p);

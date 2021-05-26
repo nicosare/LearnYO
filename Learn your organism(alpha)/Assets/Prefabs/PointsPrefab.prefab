@@ -122,7 +122,6 @@ MonoBehaviour:
   Speed: 1
   range: 2
   field: {fileID: 5899900468873868669, guid: 69e9f0f62dacbd14cacfbc9312cfbb46, type: 3}
-  audio: {fileID: 0}
 --- !u!58 &8318352250798586753
 CircleCollider2D:
   m_ObjectHideFlags: 0
