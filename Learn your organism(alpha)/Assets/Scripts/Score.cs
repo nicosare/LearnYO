@@ -64,7 +64,7 @@ public class Score : MonoBehaviour
         var rndMutation = Random.Range(0, 2);
         if (rndMutation == 0)
         {
-            this.GetComponent<PlayerMove>().Speed *= 1.2f;
+            this.GetComponent<PlayerMove>().Speed *= 1.3f;
         }
         else
         {

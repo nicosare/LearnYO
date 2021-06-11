@@ -548,7 +548,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -632,7 +632,7 @@ MonoBehaviour:
   timeBetweenSpawn: 0.5
   amount: 5
   spawnRange: 7
-  destroyRange: 10
+  destroyRange: 11
   safeZone: 3
   field: {fileID: 508317640}
 --- !u!114 &519420036
