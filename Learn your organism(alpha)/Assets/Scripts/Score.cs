@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
+    public GameObject shield;
     public GameObject scoreText;
     private int score;
     private int target;
@@ -13,7 +14,9 @@ public class Score : MonoBehaviour
     public GameObject notification;
     private int firstMutation;
     private int secondMutation;
+    private int thirdMutation;
     private bool isSelected;
+    private int rndMutation;
 
     void Start()
     {
@@ -26,13 +29,14 @@ public class Score : MonoBehaviour
     {
         if (!isSelected)
         {
-            firstMutation = Random.Range(0, 7);
-            secondMutation = Random.Range(7, 15);
+            firstMutation = Random.Range(0, 5);
+            secondMutation = Random.Range(5, 10);
+            thirdMutation = Random.Range(10, 15);
         }
         if (collisison.gameObject.CompareTag("Point"))
         {
             Count();
-            Mutation(firstMutation, secondMutation);
+            Mutation(firstMutation, secondMutation, thirdMutation);
             isSelected = true;
         }
     }
@@ -50,9 +54,9 @@ public class Score : MonoBehaviour
         }
     }
 
-    public void Mutation(int firstMutation, int secondMutation)
+    public void Mutation(int firstMutation, int secondMutation, int thirdMutation)
     {
-        if (score == firstMutation || score == secondMutation)
+        if (score == firstMutation || score == secondMutation || score == thirdMutation)
         {
             SetMutation();
             StartCoroutine(onWaiterOffNotification());
@@ -61,14 +65,22 @@ public class Score : MonoBehaviour
 
     public void SetMutation()
     {
-        var rndMutation = Random.Range(0, 2);
+        if (shield.activeSelf)
+            rndMutation = Random.Range(0, 2);
+        else
+            rndMutation = Random.Range(0, 3);
+
         if (rndMutation == 0)
         {
             this.GetComponent<PlayerMove>().Speed *= 1.3f;
         }
-        else
+        if (rndMutation == 1)
         {
             this.GetComponent<Transform>().localScale *= 1.3f;
+        }
+        if (rndMutation == 2)
+        {
+            shield.SetActive(true);
         }
     }
 
